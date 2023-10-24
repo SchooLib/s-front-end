@@ -1,8 +1,11 @@
-import SSOLogin from "./pages/SSOLogin"
+import { SSOLogin, Landing } from "./pages"
 function App() {
 
   return (
-    <SSOLogin/>
+    <>
+    {/* <SSOLogin/> */}
+    <Landing/>
+    </>
   )
 }
 

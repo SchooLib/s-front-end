@@ -1,12 +1,17 @@
-import { Button, Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
 import { Outlet, Link } from "react-router-dom";
 const { Header, Content, Footer } = Layout;
+import "./index.css"
 
 const LayoutLandingPages = () => {
     const items = [
         {
             label: <Link to="/">Home</Link>,
             key: "home",
+        },
+        {
+          label: <Link to="/listbook">List Book</Link>,
+          key: "listbook",
         },
         {
             label: <Link to="/achivement">Achivement</Link>,
@@ -30,10 +35,12 @@ const LayoutLandingPages = () => {
         </div>
         <div style={{display: "flex", alignItems: "center"}}>
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["home"]} items={items} />
-          <Button type="primary">Login</Button>
+          <div>
+            <Link to={"/login"} style={{marginLeft: "10px", border: 2, backgroundColor: "blue", padding: 15, color: "white"}} >Login</Link>
+          </div>
         </div>
       </Header>
-      <Content>
+      <Content className="content">
         <Outlet />
       </Content>
       <Footer

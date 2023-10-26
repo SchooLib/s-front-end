@@ -1,3 +1,4 @@
 import LayoutHeader from "./LayoutHeader";
+import CardBook from "./CardBook";
 
-export {LayoutHeader}
+export {LayoutHeader, CardBook}

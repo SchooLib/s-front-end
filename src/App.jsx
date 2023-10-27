@@ -1,4 +1,4 @@
-import Achivement from "./pages/LandingPages/Content/AchivementPages"
+import Achivement from "./pages/LandingPages/Content/AchivementPages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from "./pages/LandingPages/Content/ProfilePages";
 import Leaderboard from "./pages/LandingPages/Content/LeaderboardPages";
@@ -7,21 +7,25 @@ import StatistikDashboard from "./pages/DashboardPages/Content/Statistik";
 import LayoutLandingPages from "./pages/LandingPages";
 
 function App() {
-
   return (
     <>
       <Router>
         <Routes>
+          {/* Route for Login and Register */}
+          <Route path="/login" element={<h1>Login</h1>} />
+          <Route path="/register" element={<h1>Register</h1>} />
+
           {/* Route for Landing Page */}
           <Route path="/" element={<LayoutLandingPages />}>
             <Route index element={<h1>Home</h1>} />
+            <Route path="/listbook" element={<h1>List Book</h1>} />
             <Route path="/achivement" element={<Achivement />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
           </Route>
-          
+
           {/* Route for Dashboard Page */}
-          <Route path="/dashboard" element={<DashboardLayout />} >
+          <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<StatistikDashboard />} />
             <Route path="book" element={<h1>Book</h1>} />
             <Route path="user" element={<h1>User</h1>} />
@@ -33,7 +37,7 @@ function App() {
       </Router>
       {/* <h1>Hello, World</h1> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

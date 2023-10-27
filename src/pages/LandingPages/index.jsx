@@ -28,15 +28,16 @@ const LayoutLandingPages = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        color: "#fff"
+        color: "#fff",
+        backgroundColor: "#00B7F7"
       }}>
         <div className="logo">
-            <h1>Logo</h1>
+            <h1>SchooLib</h1>
         </div>
         <div style={{display: "flex", alignItems: "center"}}>
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["home"]} items={items} />
+          <Menu style={{backgroundColor: "#00B7F7", color: "white"}} mode="horizontal" defaultSelectedKeys={["home"]} items={items} />
           <div>
-            <Link to={"/login"} style={{marginLeft: "10px", border: 2, backgroundColor: "blue", padding: 15, color: "white"}} >Login</Link>
+            <Link to={"/login"} style={{marginLeft: "10px", border: 2, backgroundColor: "#012b68", padding: 15, color: "white", borderRadius: 10}} >Login</Link>
           </div>
         </div>
       </Header>

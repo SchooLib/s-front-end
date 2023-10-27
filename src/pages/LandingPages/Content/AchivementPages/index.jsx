@@ -19,12 +19,22 @@ const Achivement = () => {
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       image: 'https://img.freepik.com/free-vector/team-goals-concept-illustration_114360-6684.jpg?w=1380&t=st=1697942406~exp=1697943006~hmac=8caba5c7a483f76e6c04ea0b0e93fb0fee05674481a4cac929cf758ae08dc455',
     },
+    {
+      title: 'Achivement Reading',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      image: 'https://img.freepik.com/free-vector/team-goals-concept-illustration_114360-6684.jpg?w=1380&t=st=1697942406~exp=1697943006~hmac=8caba5c7a483f76e6c04ea0b0e93fb0fee05674481a4cac929cf758ae08dc455',
+    },
+    {
+      title: 'Achivement Reading',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      image: 'https://img.freepik.com/free-vector/team-goals-concept-illustration_114360-6684.jpg?w=1380&t=st=1697942406~exp=1697943006~hmac=8caba5c7a483f76e6c04ea0b0e93fb0fee05674481a4cac929cf758ae08dc455',
+    },
    
   ];
 
   return (
     <div>
-      <div style={{textAlign: 'center'}}>
+      <div style={{textAlign: 'center', color: "#19AFE9"}}>
         <h1>Achivement Page</h1>
       </div>
       <Row gutter={16}>

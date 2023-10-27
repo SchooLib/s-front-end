@@ -1,0 +1,12 @@
+/* .custom-menu .ant-menu-item:hover {
+    background-color: "#404a51";
+} */
+.custom-menu .ant-menu-item:hover {
+    background-color: #404a51; /* Ganti dengan warna yang Anda inginkan saat dihover */
+    color: #ffffff; /* Ganti dengan warna teks yang sesuai saat dihover */
+  }
+  
+  .custom-menu .ant-menu-item-selected {
+    background-color: #404a51; /* Ganti dengan warna yang Anda inginkan saat dipilih */
+    color: #ffffff; /* Ganti dengan warna teks yang sesuai saat dipilih */
+  }

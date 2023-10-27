@@ -9,17 +9,17 @@ const { Header } = Layout
 const LayoutHeader = () =>{
     const items = [
         {
-          label: 'List Book',
+          label: 'List Buku',
         //   key: 'mail',
         //   icon: <MailOutlined />,
         },
         {
-            label: 'Achievements',
+            label: 'Pencapaian',
           //   key: 'mail',
           //   icon: <MailOutlined />,
         },
         {
-            label: 'Leaderboard',
+            label: 'Peringkat',
           //   key: 'mail',
           //   icon: <MailOutlined />,
         },

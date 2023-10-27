@@ -18,7 +18,7 @@ const SSOLogin = () =>{
             }}>
                 <Input size="large" placeholder="Nomor Induk Siswa" prefix={<UserOutlined style={{marginRight:'10px', color:'#cfcfcf'}}/>} style={{marginBottom: '20px'}}/>
                 <Input size="large" placeholder="Kata Sandi" prefix={<KeyOutlined style={{marginRight:'10px', color:'#cfcfcf'}}/>} style={{marginBottom: '20px'}}/>
-                <Button style={{width:'100%', background:'#a0d911', color:'white'}}>Log In</Button>
+                <Button style={{width:'100%', background:'#a0d911', color:'white'}}>Masuk</Button>
             </Card>
             <Text 
             style={{

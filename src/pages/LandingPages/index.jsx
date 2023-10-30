@@ -1,8 +1,9 @@
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 const { Content } = Layout;
-import HeaderComponent from "../../components/Header";
-import FooterComponent from "../../components/Footer";
+// import HeaderComponent from "../../components/Header";
+// import FooterComponent from "../../components/Footer";
+import {HeaderComponent, FooterComponent} from "../../components"
 import "./index.css"
 
 const LayoutLandingPages = () => {

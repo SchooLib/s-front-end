@@ -34,8 +34,8 @@ const Achivement = () => {
 
   return (
     <div>
-      <div style={{textAlign: 'center', color: "#19AFE9"}}>
-        <h1>Achivement</h1>
+      <div style={{textAlign: 'center', color: "#19AFE9", marginTop:"25px"}}>
+        <h1>Pencapaian</h1>
       </div>
       <Row gutter={16}>
         {data.map((item, index) => (

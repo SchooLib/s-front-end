@@ -5,19 +5,19 @@ import { Link } from "react-router-dom";
 const HeaderComponent = () => {
   const items = [
     {
-      label: <Link to="/">Home</Link>,
+      label: <Link to="/"></Link>,
       key: "home",
     },
     {
-      label: <Link to="/listbook">List Book</Link>,
+      label: <Link to="/listbook">Daftar Buku</Link>,
       key: "listbook",
     },
     {
-      label: <Link to="/achivement">Achivement</Link>,
+      label: <Link to="/achivement">Pencapaian</Link>,
       key: "achivement",
     },
     {
-      label: <Link to="/leaderboard">Leaderboard</Link>,
+      label: <Link to="/leaderboard">Papan Peringkat</Link>,
       key: "leaderboard",
     },
   ];
@@ -33,11 +33,13 @@ const HeaderComponent = () => {
       }}
     >
       <div className="logo">
+      <Link to="/" style={{color:'white'}}>
         <h1>SchooLib</h1>
+      </Link>
       </div>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent:"space-between" }}>
         <Menu
-          style={{ backgroundColor: "#00B7F7", color: "white" }}
+          style={{ backgroundColor: "#00B7F7", color: "white", width:"30vw" }}
           mode="horizontal"
           defaultSelectedKeys={["home"]}
           items={items}
@@ -54,7 +56,7 @@ const HeaderComponent = () => {
               borderRadius: 10,
             }}
           >
-            Login
+            Masuk
           </Link>
         </div>
       </div>

@@ -58,7 +58,7 @@ const Leaderboard = () => {
 
   return (
     <div>
-        <h1 style={{textAlign: 'center'}}>Leaderboard Page</h1>
+        <h1 style={{textAlign: 'center', marginTop:'25px'}}>Papan Peringkat</h1>
         <Tabs 
             defaultActiveKey="1"
             centered

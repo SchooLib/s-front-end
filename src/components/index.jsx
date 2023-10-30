@@ -1,4 +1,5 @@
-import LayoutHeader from "./LayoutHeader";
 import CardBook from "./CardBook";
+import HeaderComponent from "./Header";
+import FooterComponent from "./Footer";
 
-export {LayoutHeader, CardBook}
+export {CardBook, HeaderComponent, FooterComponent}

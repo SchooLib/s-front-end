@@ -14,6 +14,7 @@ const CardBook = (props) =>{
     };
     const handleCancel = () => {
         setIsModalOpen(false);
+        setIsReview(false)
     };
     const handleReview = () =>{
         setIsModalOpen(true);
@@ -52,7 +53,7 @@ const CardBook = (props) =>{
                     {name}
                     </h2>
                     {
-                        isReview ? <Input/> : <p>
+                        isReview ? <Input placeholder={`Tulis ulasan untuk ${name}`}/> : <p>
                         {desc}
                         </p>
                     }

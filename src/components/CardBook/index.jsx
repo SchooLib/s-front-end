@@ -1,18 +1,67 @@
-import { Card } from 'antd';
+import {useState} from 'react';
+import { Card, Modal, Button, Input } from 'antd';
 const { Meta } = Card;
 
-const CardBook = () =>{
+const CardBook = (props) =>{
+    const {index, cover, name, desc} = props
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isReview, setIsReview] = useState(false)
+    const ModalHandler =()=>{
+        setIsModalOpen(true)
+    }
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+    const handleReview = () =>{
+        setIsModalOpen(true);
+        setIsReview(true)
+    }
     return(
-    <Card
-        hoverable
-        style={{
-          width: 240,
-          height: 400
-        }}
-        cover={<img style={{height:300}} alt="example" src="https://cdn.gramedia.com/uploads/items/9786020650357_educated_cov.jpg" />}
-    >
-        <Meta title="Educated (Terdidik): Sebuah Memoar" description="TARA WESTOVER" />
-    </Card> 
+        <>
+        
+        <Card
+            hoverable
+            style={{
+              width: 240,
+              height: 370
+            }}
+            cover={<img style={{height:300}} alt="example" src={cover} 
+            onClick={ModalHandler}
+            />}
+        >
+            <Meta style={{textAlign:'center'}} title={name} />
+        </Card> 
+            
+        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
+        footer={[
+            <Button key="back" onClick={handleCancel}>
+              Batal
+            </Button>,
+            <Button key="submit" type="primary" onClick={handleReview}>
+              {isReview ? 'Save' :'Edit'}
+            </Button>,
+          ]}
+        >
+            <div style={{display:'flex', gap:'10px'}}>
+                <img style={{height:300}} alt="example" src={cover}/>
+                <div>
+                    <h2>
+                    {name}
+                    </h2>
+                    {
+                        isReview ? <Input/> : <p>
+                        {desc}
+                        </p>
+                    }
+                    
+                </div>
+            </div>
+        </Modal> 
+            
+        </>
     )
 }
 

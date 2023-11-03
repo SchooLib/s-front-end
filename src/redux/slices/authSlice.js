@@ -2,7 +2,7 @@ import * as auth from "../services/authService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const loginAdmin = createAsyncThunk(
-  "user/login",
+  "admin/login",
   async (formData, { rejectWithValue }) => {
     try {
       const res = await auth.loginAdmin(formData);
@@ -25,13 +25,21 @@ const authSlice = createSlice({
     message: "",
     user: "",
     status: "",
+    // theme: white,
+  },
+  reducers: {
+    // setTheme: (state, action) => {
+    //   return {
+    //     ...state,
+    //     theme: action.payload,
+    //   };
+    // },
   },
   extraReducers: {
     [loginAdmin.pending]: (state, action) => {
       return { ...state, loading: true, message: "Processing your action..." };
     },
     [loginAdmin.fulfilled]: (state, action) => {
-      console.log({ payload: action.payload });
       return {
         loading: false,
         message: action.payload?.meta.message,
@@ -50,4 +58,5 @@ const authSlice = createSlice({
   },
 });
 
+// export const { setTheme } = authSlice.actions;
 export default authSlice.reducer;

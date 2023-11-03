@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Card, Input, Button, Typography, Switch } from "antd";
 import { UserOutlined, KeyOutlined } from "@ant-design/icons";
 import "./index.css";
-import { useDispatch } from "react-redux";
-import { loginAdmin } from "../../redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAdmin, setTheme } from "../../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
 
@@ -13,6 +14,8 @@ const SSOLogin = () => {
     setIsAdmin(checked);
   };
 
+  // const { user, loading } = useSelector(state => state.auth);
+
   const [formData, setFormData] = useState({
     username: "",
     nisn: "",
@@ -20,7 +23,7 @@ const SSOLogin = () => {
   });
 
   const dispatch = useDispatch();
-
+  const redirect = useNavigate()
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target; //event target destructuring
@@ -37,8 +40,9 @@ const SSOLogin = () => {
     e.preventDefault();
     if (isAdmin) {
       dispatch(
-        loginAdmin({ username: formData.username, password: formData.password })
+        loginAdmin({ data :{username: formData.username, password: formData.password }})
       );
+      // dispatch(setTheme("dark"))
     } else {
       //dispacth loginUser
     }

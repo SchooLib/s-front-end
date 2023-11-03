@@ -1,4 +1,4 @@
-import { SSOLogin, Landing, ListBook } from "./pages"
+import { SSOLogin, Landing, ListBook } from "./pages";
 import Achivement from "./pages/LandingPages/Content/AchivementPages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from "./pages/LandingPages/Content/ProfilePages";
@@ -6,6 +6,7 @@ import Leaderboard from "./pages/LandingPages/Content/LeaderboardPages";
 import DashboardLayout from "./pages/DashboardPages";
 import StatistikDashboard from "./pages/DashboardPages/Content/Statistik";
 import LayoutLandingPages from "./pages/LandingPages";
+import DetailBook from "./pages/DetailBook";
 
 function App() {
   return (
@@ -13,13 +14,14 @@ function App() {
       <Router>
         <Routes>
           {/* Route for Login and Register */}
-          <Route path="/login" element={<SSOLogin/>} />
+          <Route path="/login" element={<SSOLogin />} />
           <Route path="/register" element={<h1>Register</h1>} />
 
           {/* Route for Landing Page */}
           <Route path="/" element={<LayoutLandingPages />}>
-            <Route index element={<Landing/>} />
-            <Route path="/listbook" element={<ListBook/>} />
+            <Route index element={<Landing />} />
+            <Route path="/listbook" element={<ListBook />} />
+            <Route path="/listbook/detail/:bookId" element={<DetailBook />} />
             <Route path="/achivement" element={<Achivement />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
@@ -36,7 +38,6 @@ function App() {
           </Route>
         </Routes>
       </Router>
-
     </>
   );
 }

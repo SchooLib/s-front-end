@@ -30,13 +30,13 @@ const CardBook = (props) =>{
               height: 370
             }}
             cover={<img style={{height:300}} alt="example" src={cover} 
-            onClick={ModalHandler}
+            // onClick={ModalHandler}
             />}
         >
             <Meta style={{textAlign:'center'}} title={name} />
         </Card> 
             
-        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
+        {/* <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
         footer={[
             <Button key="back" onClick={handleCancel}>
               Batal
@@ -60,7 +60,7 @@ const CardBook = (props) =>{
                     
                 </div>
             </div>
-        </Modal> 
+        </Modal>  */}
             
         </>
     )

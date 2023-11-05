@@ -1,4 +1,5 @@
-import { SSOLogin, Landing, ListBook } from "./pages"
+import { useState } from "react";
+import { SSOLogin, Landing, ListBook, DetailBook } from "./pages"
 import Achivement from "./pages/LandingPages/Content/AchivementPages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from "./pages/LandingPages/Content/ProfilePages";
@@ -8,12 +9,17 @@ import StatistikDashboard from "./pages/DashboardPages/Content/Statistik";
 import LayoutLandingPages from "./pages/LandingPages";
 
 function App() {
+  const [isLogin,setIsLogin] = useState(false)
+  const loginHandle =(e)=>{
+    setIsLogin(e)
+  }
+  console.log(isLogin)
   return (
     <>
       <Router>
         <Routes>
           {/* Route for Login and Register */}
-          <Route path="/login" element={<SSOLogin/>} />
+          <Route path="/login" element={<SSOLogin login={loginHandle}/>} />
           <Route path="/register" element={<h1>Register</h1>} />
 
           {/* Route for Landing Page */}
@@ -23,6 +29,7 @@ function App() {
             <Route path="/achivement" element={<Achivement />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/detail-book/:id" element={<DetailBook />} />
           </Route>
 
           {/* Route for Dashboard Page */}

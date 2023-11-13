@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 
 const SidebarComponent = () => {
   const [collapsed, setCollapsed] = useState(false);
+  
   const items = [
     {
       label: <Link to="/dashboard">Dashboard</Link>,

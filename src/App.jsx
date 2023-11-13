@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { SSOLogin, Landing, ListBook } from "./pages"
 import Achivement from "./pages/LandingPages/Content/AchivementPages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -10,6 +11,7 @@ import LayoutLandingPages from "./pages/LandingPages";
 function App() {
   return (
     <>
+      <Toaster position="top-right" toastOptions={{ duration: 2000 }} />
       <Router>
         <Routes>
           {/* Route for Login and Register */}

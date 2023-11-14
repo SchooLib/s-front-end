@@ -7,6 +7,7 @@ import Leaderboard from "./pages/LandingPages/Content/LeaderboardPages";
 import DashboardLayout from "./pages/DashboardPages";
 import StatistikDashboard from "./pages/DashboardPages/Content/Statistik";
 import LayoutLandingPages from "./pages/LandingPages";
+import DetailBook from "./pages/DetailBook";
 
 function App() {
   const [isLogin,setIsLogin] = useState(false)
@@ -24,8 +25,9 @@ function App() {
 
           {/* Route for Landing Page */}
           <Route path="/" element={<LayoutLandingPages />}>
-            <Route index element={<Landing/>} />
-            <Route path="/listbook" element={<ListBook/>} />
+            <Route index element={<Landing />} />
+            <Route path="/listbook" element={<ListBook />} />
+            <Route path="/listbook/detail/:bookId" element={<DetailBook />} />
             <Route path="/achivement" element={<Achivement />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
@@ -43,7 +45,6 @@ function App() {
           </Route>
         </Routes>
       </Router>
-
     </>
   );
 }

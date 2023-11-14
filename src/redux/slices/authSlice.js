@@ -1,14 +1,16 @@
 import * as auth from "../services/authService";
+import { useNavigate } from "react-router-dom";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const loginAdmin = createAsyncThunk(
   "admin/login",
-  async (formData, { rejectWithValue }) => {
+  async (formData, cb, { rejectWithValue }) => {
     try {
       const res = await auth.loginAdmin(formData);
 
       if (res.data.meta.status == "success") {
         localStorage.setItem("user", JSON.stringify({ token: res.data.token }));
+        cb
       }
 
       return res.data;
@@ -28,12 +30,12 @@ const authSlice = createSlice({
     // theme: white,
   },
   reducers: {
-    // setTheme: (state, action) => {
-    //   return {
-    //     ...state,
-    //     theme: action.payload,
-    //   };
-    // },
+    setTheme: (state, action) => {
+      return {
+        ...state,
+        theme: action.payload,
+      };
+    },
   },
   extraReducers: {
     [loginAdmin.pending]: (state, action) => {
@@ -58,5 +60,5 @@ const authSlice = createSlice({
   },
 });
 
-// export const { setTheme } = authSlice.actions;
+export const { setTheme } = authSlice.actions;
 export default authSlice.reducer;

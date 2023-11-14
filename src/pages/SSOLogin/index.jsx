@@ -40,7 +40,7 @@ const SSOLogin = () => {
     e.preventDefault();
     if (isAdmin) {
       dispatch(
-        loginAdmin({ data :{username: formData.username, password: formData.password }})
+        loginAdmin({ username: formData.username, password: formData.password },redirect('/dashboard'))
       );
       // dispatch(setTheme("dark"))
     } else {
@@ -101,7 +101,7 @@ const SSOLogin = () => {
               style={{ marginBottom: "20px" }}
             />
           )}
-          <Input
+          <Input.Password
             size="large"
             name="password"
             onChange={handleChange}

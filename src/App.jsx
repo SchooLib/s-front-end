@@ -7,7 +7,7 @@ import Leaderboard from "./pages/LandingPages/Content/LeaderboardPages";
 import DashboardLayout from "./pages/DashboardPages";
 import StatistikDashboard from "./pages/DashboardPages/Content/Statistik";
 import LayoutLandingPages from "./pages/LandingPages";
-import DetailBook from "./pages/DetailBook";
+// import DetailBook from "./pages/DetailBook"
 
 function App() {
   const [isLogin,setIsLogin] = useState(false)
@@ -31,7 +31,7 @@ function App() {
             <Route path="/achivement" element={<Achivement />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/detail-book/:id" element={<DetailBook />} />
+            {/* <Route path="/detail-book/:id" element={<DetailBook />} /> */}
           </Route>
 
           {/* Route for Dashboard Page */}

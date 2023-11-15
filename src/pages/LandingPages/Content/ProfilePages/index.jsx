@@ -1,7 +1,10 @@
 import { Row, Col } from "antd";
 import "./index.css"
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+
+  const user = useSelector((state) => state.auth.user);
  
   return (
     <div className="content-profile">
@@ -18,8 +21,8 @@ const Profile = () => {
             <div>
             <img src="https://picsum.photos/id/1/200/300" alt="profile" className="image-profile"/>
             <form style={{display:"flex", flexFlow: "column"}}>
-              <input type="text" placeholder="Nama" className="input-profile" style={{padding: '10px', marginTop: '10px', marginBottom: '10px'}} disabled/>
-              <input type="text" placeholder="NISN" className="input-profile" style={{padding: '10px', marginTop: '10px', marginBottom: '10px'}} disabled/>
+              <input type="text" value={user.fullName} className="input-profile" style={{padding: '10px', marginTop: '10px', marginBottom: '10px'}} disabled/>
+              <input type="text" value={user.id} className="input-profile" style={{padding: '10px', marginTop: '10px', marginBottom: '10px'}} disabled/>
             </form>
             </div>
             

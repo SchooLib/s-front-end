@@ -8,7 +8,9 @@ export const loginAdmin = createAsyncThunk(
       const res = await auth.loginAdmin(formData);
 
       if (res.data.meta.status == "success") {
-        localStorage.setItem("user", JSON.stringify({ token: res.data.token }));
+        localStorage.setItem("user", JSON.stringify({ 
+          token: res.data.token
+        }));
       }
 
       return res.data;
@@ -25,6 +27,7 @@ const authSlice = createSlice({
     message: "",
     user: "",
     status: "",
+    isAuthenticated: false,
     // theme: white,
   },
   reducers: {
@@ -36,7 +39,7 @@ const authSlice = createSlice({
     // },
   },
   extraReducers: {
-    [loginAdmin.pending]: (state, action) => {
+    [loginAdmin.pending]: (state) => {
       return { ...state, loading: true, message: "Processing your action..." };
     },
     [loginAdmin.fulfilled]: (state, action) => {
@@ -45,6 +48,7 @@ const authSlice = createSlice({
         message: action.payload?.meta.message,
         user: action.payload?.data,
         status: action.payload?.status,
+        isAuthenticated: true,
       };
     },
     [loginAdmin.rejected]: (state, action) => {
@@ -53,6 +57,7 @@ const authSlice = createSlice({
         message: action.payload?.data.meta.message,
         user: {},
         status: "error",
+        isAuthenticated: false,
       };
     },
   },

@@ -1,8 +1,14 @@
+
 import { Layout, Menu } from "antd";
+import { useSelector } from "react-redux";
 const { Header } = Layout;
 import { Link } from "react-router-dom";
 
+
 const HeaderComponent = () => {
+
+  const user = useSelector((state) => state.auth.user);
+
   const items = [
     {
       label: <Link to="/"></Link>,
@@ -45,19 +51,27 @@ const HeaderComponent = () => {
           items={items}
         />
         <div>
-          <Link
-            to={"/login"}
-            style={{
-              marginLeft: "10px",
-              border: 2,
-              backgroundColor: "#012b68",
-              padding: 15,
-              color: "white",
-              borderRadius: 10,
-            }}
-          >
-            Masuk
-          </Link>
+          {user ? (
+            <div style={{display: "flex"}}>
+              <p style={{marginRight: "10px"}}>120 Point</p>
+              <Link to={"/profile"} style={{ color: "white", marginRight: "10px" }}>{user.username}</Link>
+            </div>
+            
+          ) : (
+            <Link
+              to={"/login"}
+              style={{
+                marginLeft: "10px",
+                border: 2,
+                backgroundColor: "#012b68",
+                padding: 15,
+                color: "white",
+                borderRadius: 10,
+              }}
+            >
+              Masuk
+            </Link>
+          )}
         </div>
       </div>
     </Header>

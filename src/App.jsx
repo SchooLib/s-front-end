@@ -6,6 +6,9 @@ import Leaderboard from "./pages/LandingPages/Content/LeaderboardPages";
 import DashboardLayout from "./pages/DashboardPages";
 import StatistikDashboard from "./pages/DashboardPages/Content/Statistik";
 import LayoutLandingPages from "./pages/LandingPages";
+import { Book } from "./pages/BookAdmin";
+import { UserAdmin } from "./pages/usersAdmin";
+import { AcheivementAdmin } from "./pages/acheivement";
 
 function App() {
   return (
@@ -28,9 +31,9 @@ function App() {
           {/* Route for Dashboard Page */}
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<StatistikDashboard />} />
-            <Route path="book" element={<h1>Book</h1>} />
-            <Route path="user" element={<h1>User</h1>} />
-            <Route path="achievement" element={<h1>Achievement</h1>} />
+            <Route path="book" element={<Book/>} />
+            <Route path="user" element={<UserAdmin/>} />
+            <Route path="achievement" element={<AcheivementAdmin/>} />
             <Route path="profile" element={<h1>Profile</h1>} />
             <Route path="sekolah" element={<h1>Sekolah</h1>} />
           </Route>

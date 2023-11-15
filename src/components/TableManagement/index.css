@@ -1,0 +1,12 @@
+.addData{
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.table-management{
+    padding: 30px;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px rgb(0, 0, 0,0.5);
+}

@@ -1,0 +1,6 @@
+.headers{
+    display: flex;
+    padding:10px 30px;
+    font-size: 13px;
+    align-items: center;
+}

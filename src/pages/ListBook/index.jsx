@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchBook } from "../../redux/slices/authSlice";
+import { fetchBook } from "../../redux/slices/bookSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { CardBook } from "../../components"
 import { Link } from 'react-router-dom';

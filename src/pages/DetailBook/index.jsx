@@ -1,11 +1,8 @@
-// import { useState } from 'react';
 // import { useParams, Link } from 'react-router-dom';
-// import { Input, Button } from 'antd';
 
-// const { TextArea } = Input
 // const DetailBook = () =>{
 //     const {bookId} = useParams()
-//     const datas = 
+//     const datas =
 //     [
 //         {
 //             id: 1,
@@ -21,36 +18,91 @@
 //         },
 //     ]
 //     const data = datas.find((data) => data.id === parseInt(id));
-//     const [isType, setIsType] = useState('')
-//     const handleReview = (e)=>{
-//         setIsType(e.target.value)
-//     }
-//     return(
-//         <>
-//         <Link to='/listbook' style={{margin:'40px', display:'block', width:'fit-content'}}>Kembali ke Daftar Buku</Link>
-//         <div style={{display:'flex', gap:'30px', margin:'40px' }}>
-//             <img style={{height:400}} alt="example" src={data.cover}/>
-//             <div style={{display:'flex', flexDirection:'column', gap:'20px'}}>
-//                 <h2>{data.name}</h2>            
-//                 <p>{data.desc}</p>
-//                 <TextArea placeholder={`Tulis ulasan untuk ${data.name}`} style={{height:'250px', width:'500px'}} onChange={handleReview}/>
-//                 <Button style={{background:'#012b68', color:'white'}} onClick={()=>isType? console.log('ada'):console.log('kosong')}>Kirim</Button> 
-//             </div>
-//         </div>
-//         </>
-//     )
 // }
 
 // export default DetailBook
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { fetchBook } from "../../redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import { Input, Button } from "antd";
+const { TextArea } = Input;
 
 const DetailBook = () => {
-  const { bookId } = useParams();
+  // const { datas } = props;
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
+  const { data, loading, error } = useSelector((state) => state.books);
+  useEffect(() => {
+    dispatch(fetchBook());
+  }, [dispatch]);
+
+  const findBookHandle = (e) => {
+    for (let a = 0; a < data.length; a++) {
+      if (data[a].id === e) {
+        return data[a];
+      }
+    }
+    return null;
+  };
+  const bookInfo = findBookHandle(id);
+  // console.log(bookInfo.title);
+  const [isType, setIsType] = useState("");
+  const handleReview = (e) => {
+    setIsType(e.target.value);
+  };
   // fetch book detail using this bookId
-
-  return <div>DetailBook {bookId}</div>;
+  // const publisher = ''
+  // bookInfo.map((index,a)=>{
+  //   publisher = a.name
+  // })
+  return (
+    <>
+    {bookInfo?
+    <>
+      <Link
+        to="/listbook"
+        style={{ margin: "40px", display: "block", width: "fit-content" }}
+      >
+        Kembali ke Daftar Buku
+      </Link>
+      <div style={{ display: "flex", gap: "30px", margin: "40px" }}>
+        <img
+          style={{ height: 400, width: 300 }}
+          alt="example"
+          src={bookInfo.image}
+        />
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          <h2>{bookInfo.title}</h2>
+          <p>Penerbit : {bookInfo.publisher}</p>
+          <p>Kategori :
+             {bookInfo.classifications.map((p)=>{
+              return(
+                 p.name
+              )
+            })}
+          </p>
+          <p>{bookInfo.desc}</p>
+          <TextArea
+            placeholder={`Tulis ulasan untuk ${bookInfo.title}`}
+            style={{ height: "250px", width: "500px" }}
+            onChange={handleReview}
+          />
+          <Button
+            style={{ background: "#012b68", color: "white" }}
+            onClick={() =>
+              isType ? console.log("ada") : console.log("kosong")
+            }
+          >
+            Kirim
+          </Button>
+        </div>
+      </div>
+      </>
+      :null}
+    </>
+  );
 };
 
 export default DetailBook;

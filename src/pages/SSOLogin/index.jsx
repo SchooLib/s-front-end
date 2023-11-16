@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Input, Button, Typography, Switch } from "antd";
 import { UserOutlined, KeyOutlined } from "@ant-design/icons";
 import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAdmin, setTheme } from "../../redux/slices/authSlice";
+import { loginAdmin, setTheme, fetchBook } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
@@ -13,18 +13,24 @@ const SSOLogin = () => {
   const AdminHandler = (checked) => {
     setIsAdmin(checked);
   };
-
+  
   // const { user, loading } = useSelector(state => state.auth);
-
+  
   const [formData, setFormData] = useState({
     username: "",
     nisn: "",
     password: "",
   });
-
+  
   const dispatch = useDispatch();
   const redirect = useNavigate()
+  const {data, loading, error} = useSelector((state)=> state.books)
+  
+  useEffect(()=>{
+    dispatch(fetchBook())
+  }, [dispatch])
 
+  // console.log(data)
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target; //event target destructuring
     setFormData((prevFormData) => {
@@ -40,7 +46,7 @@ const SSOLogin = () => {
     e.preventDefault();
     if (isAdmin) {
       dispatch(
-        loginAdmin({ username: formData.username, password: formData.password },redirect('/dashboard'))
+        loginAdmin({ username: formData.username, password: formData.password })
       );
       // dispatch(setTheme("dark"))
     } else {

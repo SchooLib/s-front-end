@@ -34,7 +34,7 @@ const HeaderComponent = () => {
     >
       <div className="logo">
       <Link to="/" style={{color:'white'}}>
-        <h1>SchooLib</h1>
+        <h1>GoLib</h1>
       </Link>
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent:"space-between" }}>

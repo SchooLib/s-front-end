@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { Card, Modal, Button, Input } from 'antd';
+import { Card, Modal, Button, Input, Col } from 'antd';
 const { Meta } = Card;
 
 const CardBook = (props) =>{
@@ -22,19 +22,20 @@ const CardBook = (props) =>{
     }
     return(
         <>
-        
-        <Card
-            hoverable
-            style={{
-              width: 240,
-              height: 370
-            }}
-            cover={<img style={{height:300}} alt="example" src={cover} 
-            // onClick={ModalHandler}
-            />}
-        >
-            <Meta style={{textAlign:'center'}} title={name} />
-        </Card> 
+        <Col span={12}>
+            <Card
+                hoverable
+                style={{
+                width: 240,
+                height: 370
+                }}
+                cover={<img style={{height:300}} alt="example" src={cover} 
+                // onClick={ModalHandler}
+                />}
+            >
+                <Meta style={{textAlign:'center'}} title={name} />
+            </Card> 
+        </Col>
             
         {/* <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
         footer={[

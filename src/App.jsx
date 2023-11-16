@@ -8,9 +8,13 @@ import DashboardLayout from "./pages/DashboardPages";
 import StatistikDashboard from "./pages/DashboardPages/Content/Statistik";
 import LayoutLandingPages from "./pages/LandingPages";
 // import DetailBook from "./pages/DetailBook"
-
+import "./index.css"
 function App() {
   const [isLogin,setIsLogin] = useState(false)
+  const [selectedBook, setSelectedBook] = useState(null)
+  const selectBookHandle = (data)=>{
+    setSelectedBook(data)
+  }
   const loginHandle =(e)=>{
     setIsLogin(e)
   }
@@ -26,12 +30,12 @@ function App() {
           {/* Route for Landing Page */}
           <Route path="/" element={<LayoutLandingPages />}>
             <Route index element={<Landing />} />
-            <Route path="/listbook" element={<ListBook />} />
-            <Route path="/listbook/detail/:bookId" element={<DetailBook />} />
+            <Route path="/listbook" element={<ListBook datas={selectBookHandle}/>} />
+            {/* <Route path="/listbook/detail/:bookId" element={<DetailBook />} /> */}
             <Route path="/achivement" element={<Achivement />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-            {/* <Route path="/detail-book/:id" element={<DetailBook />} /> */}
+            <Route path="/detail-book/:id" element={<DetailBook datas={selectedBook}/>} />
           </Route>
 
           {/* Route for Dashboard Page */}

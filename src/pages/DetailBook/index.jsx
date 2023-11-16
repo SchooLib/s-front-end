@@ -22,7 +22,7 @@
 
 // export default DetailBook
 import React, { useState, useEffect } from "react";
-import { fetchBook } from "../../redux/slices/authSlice";
+import { fetchBook } from "../../redux/slices/bookSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { Input, Button } from "antd";
@@ -73,7 +73,7 @@ const DetailBook = () => {
           alt="example"
           src={bookInfo.image}
         />
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px", width:'100%' }}>
           <h2>{bookInfo.title}</h2>
           <p>Penerbit : {bookInfo.publisher}</p>
           <p>Kategori :
@@ -86,7 +86,7 @@ const DetailBook = () => {
           <p>{bookInfo.desc}</p>
           <TextArea
             placeholder={`Tulis ulasan untuk ${bookInfo.title}`}
-            style={{ height: "250px", width: "500px" }}
+            style={{ height: "250px", width: "100%" }}
             onChange={handleReview}
           />
           <Button

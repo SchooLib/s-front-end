@@ -27,7 +27,8 @@ const CardBook = (props) =>{
                 hoverable
                 style={{
                 width: 240,
-                height: 370
+                height: 370,
+                marginBottom:'20px'
                 }}
                 cover={<img style={{height:300}} alt="example" src={cover} 
                 // onClick={ModalHandler}

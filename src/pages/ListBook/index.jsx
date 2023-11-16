@@ -15,22 +15,6 @@ const ListBook = (props) =>{
     dispatch(fetchBook())
   }, [dispatch])
   datas(data)
-//   console.log(data)
-    // const datas = 
-    // [
-    //     {
-    //         id: 1,
-    //         cover : 'https://cdn.gramedia.com/uploads/items/9786020650357_educated_cov.jpg',
-    //         name : 'Book 1',
-    //         desc : 'Book 1 is Lorem Ipsum'
-    //     },
-    //     {
-    //         id:2,
-    //         cover : 'https://cdn.gramedia.com/uploads/items/9786020650357_educated_cov.jpg',
-    //         name : 'Book 2',
-    //         desc : 'Book 2 is Lorem Ipsum'
-    //     },
-    // ]
     return(
         <>
             <div style={{ background: '#B9F0FC', padding: '50px',  display:'flex', gap:'20px'}}>

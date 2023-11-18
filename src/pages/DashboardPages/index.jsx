@@ -9,6 +9,8 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
   
   const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("persist:user")
     navigate("/login");
   }
 

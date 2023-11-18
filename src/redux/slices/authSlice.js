@@ -1,16 +1,17 @@
 import * as auth from "../services/authService";
-import { useNavigate } from "react-router-dom";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
 export const loginAdmin = createAsyncThunk(
   "admin/login",
-  async (formData,{ rejectWithValue }) => {
+  async ({data, redirect}, { rejectWithValue }) => {
     try {
-      const res = await auth.loginAdmin(formData);
+      const res = await auth.loginAdmin(data);
 
       if (res.data.meta.status == "success") {
-        localStorage.setItem("user", JSON.stringify({ token: res.data.token }));
+        localStorage.setItem("user", JSON.stringify({ 
+          token: res.data.token
+        }));
+        redirect('/dashboard')
       }
 
       return res.data;
@@ -20,14 +21,25 @@ export const loginAdmin = createAsyncThunk(
   }
 );
 
-export const fetchBook = createAsyncThunk('books/fetchBook', async ()=>{
-  try{
-    const response = await axios.get('http://localhost:3000/api/v1/books');
-    return response.data;
-  }catch (error){
-    throw error
+export const loginUser = createAsyncThunk(
+  "user/login",
+  async ({data, redirect}, { rejectWithValue }) => {
+    try {
+      const res = await auth.loginUser(data);
+
+      if (res.data.meta.status == "success") {
+        localStorage.setItem("user", JSON.stringify({ 
+          token: res.data.token
+        }));
+        redirect('/dashboard')
+      }
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
   }
-})
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -36,24 +48,19 @@ const authSlice = createSlice({
     message: "",
     user: "",
     status: "",
+    isAuthenticated: false,
     // theme: white,
   },
   reducers: {
-    setTheme: (state, action) => {
-      return {
-        ...state,
-        theme: action.payload,
-      };
-    },
-    // setAdmin: (state, action)=>{
-    //   state.message= action.payload.meta.message;
-    //   state.user= action.payload.data;
-    //   state.status= action.payload.status;
-    // }
-    
+    // setTheme: (state, action) => {
+    //   return {
+    //     ...state,
+    //     theme: action.payload,
+    //   };
+    // },
   },
   extraReducers: {
-    [loginAdmin.pending]: (state, action) => {
+    [loginAdmin.pending]: (state) => {
       return { ...state, loading: true, message: "Processing your action..." };
     },
     [loginAdmin.fulfilled]: (state, action) => {
@@ -62,6 +69,7 @@ const authSlice = createSlice({
         message: action.payload?.meta.message,
         user: action.payload?.data,
         status: action.payload?.status,
+        isAuthenticated: true,
       };
     },
     [loginAdmin.rejected]: (state, action) => {
@@ -70,43 +78,33 @@ const authSlice = createSlice({
         message: action.payload?.data.meta.message,
         user: {},
         status: "error",
+        isAuthenticated: false,
       };
     },
+    [loginUser.pending]: (state) => {
+      return { ...state, loading: true, message: "Processing your action..." };
+    },
+    [loginUser.fulfilled]: (state, action) => {
+      return {
+        loading: false,
+        message: action.payload?.meta.message,
+        user: action.payload?.data,
+        status: action.payload?.status,
+        isAuthenticated: true,
+      };
+    },
+    [loginUser.rejected]: (state, action) => {
+      return {
+        loading: false,
+        message: action.payload?.data.meta.message,
+        user: {},
+        status: "error",
+        isAuthenticated: false,
+      };
+    },
+    
   },
 });
 
-const booksSlice = createSlice({
-  name:'books',
-  initialState:{
-    data: [],
-    loading: false,
-    error:null,
-  },
-  reducers:{},
-  extraReducers:{
-    [fetchBook.pending]: (state, action) => {
-      return { ...state, loading: true};
-    },
-    [fetchBook.fulfilled]: (state, action) => {
-      return {
-        loading: false,
-        // message: action.payload?.meta.message,
-        data: action.payload?.data.contents,
-        // status: action.payload?.status,
-      };
-    },
-    [fetchBook.rejected]: (state, action) => {
-      return {
-        loading: false,
-        // message: action.payload?.data.meta.message,
-        data: {},
-        // status: "error",
-      };
-    },
-  }
-})
-
-export const { setTheme } = authSlice.actions;
-export const { fetchBookStart,fetchBookSuccess,fetchBookFailure} = booksSlice.actions;
-export const authReducer = authSlice.reducer;
-export const bookReducer = booksSlice.reducer;
+// export const { setTheme } = authSlice.actions;
+export default authSlice.reducer;

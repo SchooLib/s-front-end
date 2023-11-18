@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Card, Input, Button, Typography, Switch } from "antd";
 import { UserOutlined, KeyOutlined } from "@ant-design/icons";
-import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAdmin, setTheme, fetchBook } from "../../redux/slices/authSlice";
+import { loginAdmin, loginUser } from "../../redux/slices/authSlice";
+import "./index.css";
 import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
@@ -13,24 +13,18 @@ const SSOLogin = () => {
   const AdminHandler = (checked) => {
     setIsAdmin(checked);
   };
-  
+
   // const { user, loading } = useSelector(state => state.auth);
-  
+
   const [formData, setFormData] = useState({
     username: "",
     nisn: "",
     password: "",
   });
-  
+
   const dispatch = useDispatch();
   const redirect = useNavigate()
-  const {data, loading, error} = useSelector((state)=> state.books)
-  
-  useEffect(()=>{
-    dispatch(fetchBook())
-  }, [dispatch])
 
-  // console.log(data)
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target; //event target destructuring
     setFormData((prevFormData) => {
@@ -45,12 +39,19 @@ const SSOLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isAdmin) {
+      console.log(formData)
       dispatch(
-        loginAdmin({ username: formData.username, password: formData.password })
+        loginAdmin({ data :{username: formData.username, password: formData.password },redirect})
       );
+      // redirect('/dashboard')
       // dispatch(setTheme("dark"))
     } else {
       //dispacth loginUser
+      console.log(formData)
+      dispatch(
+        loginUser({ data :{nisn: formData.nisn, password: formData.password },redirect})
+      );
+
     }
   };
 
@@ -81,8 +82,10 @@ const SSOLogin = () => {
               onChange={AdminHandler}
             />
           </div>
+
           {isAdmin ? (
             <Input
+              type="text"
               size="large"
               name="username"
               onChange={handleChange}
@@ -96,8 +99,10 @@ const SSOLogin = () => {
             />
           ) : (
             <Input
+              type="text"
               size="large"
               name="nisn"
+              onChange={handleChange}
               placeholder="Nomor Induk Siswa"
               prefix={
                 <UserOutlined

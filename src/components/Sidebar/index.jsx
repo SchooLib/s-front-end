@@ -5,13 +5,16 @@ import {
   BookOutlined,
   TrophyOutlined,
 } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 import { Layout, Menu } from "antd";
 const { Sider } = Layout;
 import { Link } from "react-router-dom";
 
 const SidebarComponent = () => {
+  const user = useSelector((state) => state.auth.user);
   const [collapsed, setCollapsed] = useState(false);
+  
   const items = [
     {
       label: <Link to="/dashboard">Dashboard</Link>,
@@ -91,8 +94,8 @@ const SidebarComponent = () => {
           </div>
           {!collapsed && (
             <div style={{ color: "white", marginLeft: 10 }}>
-              <h3>Role Admin</h3>
-              <p>M. Faiq</p>
+               <h3 style={{textTransform: "capitalize"}}>Role {user.role}</h3>
+              <p>{user.fullName}</p>
             </div>
           )}
         </div>

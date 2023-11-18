@@ -34,6 +34,7 @@ const DetailBook = () => {
   const { id } = useParams();
 
   const { data, loading, error } = useSelector((state) => state.books);
+  const userId = useSelector((state) => state.auth.user.id);
   useEffect(() => {
     dispatch(fetchBook());
   }, [dispatch]);
@@ -84,19 +85,26 @@ const DetailBook = () => {
             })}
           </p>
           <p>{bookInfo.desc}</p>
+          {userId?
+          <>
           <TextArea
             placeholder={`Tulis ulasan untuk ${bookInfo.title}`}
             style={{ height: "250px", width: "100%" }}
             onChange={handleReview}
-          />
+            />
           <Button
             style={{ background: "#012b68", color: "white" }}
             onClick={() =>
               isType ? console.log("ada") : console.log("kosong")
             }
-          >
+            >
             Kirim
           </Button>
+          </> : 
+          <Link to={'/login'}>
+            <Button>Klik untuk masuk dan mengulas buku</Button>
+          </Link>
+        }
         </div>
       </div>
       </>

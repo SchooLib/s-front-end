@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginAdmin, loginUser } from "../../redux/slices/authSlice";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const { Text } = Typography;
 
@@ -58,6 +59,12 @@ const SSOLogin = () => {
   return (
     <>
       <div style={{ background: "#B9F0FC", padding: "30px", height: "100vh" }}>
+      <Link to={'/'} style={{textDecoration:'none', backgroundColor:'#00B7F7',  padding:'10px', borderRadius:'5px'}}>
+        <Text style={{color:"white"}}>
+        Kembali ke Halaman Utama
+        </Text>
+      </Link>
+        
         <Card
           bordered={false}
           style={{

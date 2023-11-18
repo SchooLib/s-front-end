@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Layout, Menu } from "antd";
+import { UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/slices/userSlice";
 const { Header } = Layout;
@@ -60,8 +61,10 @@ const HeaderComponent = () => {
         <div>
           {userId ? (
             <div style={{display: "flex"}}>
-              <p style={{marginRight: "10px"}}>{user.point === null ? 0 : user.point} Point</p>
-              <Link to={"/profile"} style={{ color: "white", marginRight: "10px" }}>{user.fullName}</Link>
+              <Link to={"/profile"} style={{ color: "white", marginRight: "10px" }}>
+                <UserOutlined style={{fontSize:'20px', marginTop:'28px'}}/>
+                </Link>
+              <p style={{marginRight: "10px", marginTop:'5px'}}>{user.point === null ? 0 : user.point} Point</p>
             </div>
             
           ) : (

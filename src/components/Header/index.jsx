@@ -5,13 +5,13 @@ import { getUserById } from "../../redux/slices/userSlice";
 const { Header } = Layout;
 import { Link } from "react-router-dom";
 
-
 const HeaderComponent = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.user.id);
+  const loading = useSelector((state) => state.user.loading);
 
   useEffect(() => {
-    dispatch(getUserById(userId))
+    dispatch(getUserById(userId));
   }, [dispatch, userId]);
 
   const user = useSelector((state) => state.user.user);
@@ -46,25 +46,25 @@ const HeaderComponent = () => {
       }}
     >
       <div className="logo">
-      <Link to="/" style={{color:'white'}}>
-        <h1>SchooLib</h1>
-      </Link>
+        <Link to="/" style={{ color: "white" }}>
+          <h1>SchooLib</h1>
+        </Link>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent:"space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <Menu
-          style={{ backgroundColor: "#00B7F7", color: "white", width:"30vw" }}
+          style={{ backgroundColor: "#00B7F7", color: "white", width: "30vw" }}
           mode="horizontal"
           defaultSelectedKeys={["home"]}
           items={items}
         />
         <div>
-          {user ? (
-            <div style={{display: "flex"}}>
-              <p style={{marginRight: "10px"}}>{user.point === null ? 0 : user.point} Point</p>
-              <Link to={"/profile"} style={{ color: "white", marginRight: "10px" }}>{user.fullName}</Link>
-            </div>
-            
-          ) : (
+          {user && loading ? (
             <Link
               to={"/login"}
               style={{
@@ -78,6 +78,18 @@ const HeaderComponent = () => {
             >
               Masuk
             </Link>
+          ) : (
+            <div style={{ display: "flex" }}>
+              <p style={{ marginRight: "10px" }}>
+                {user.point === null ? 0 : user.point} Point
+              </p>
+              <Link
+                to={"/profile"}
+                style={{ color: "white", marginRight: "10px" }}
+              >
+                {user.fullName}
+              </Link>
+            </div>
           )}
         </div>
       </div>

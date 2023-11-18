@@ -35,7 +35,7 @@ const Profile = () => {
             }}
           >
             <div>
-              <img src={user.img} alt="profile" className="image-profile" />
+              <img src={user.img || `https://ui-avatars.com/api/?name=${user.fullName}`} alt="profile" className="image-profile" />
               <form style={{ display: "flex", flexFlow: "column" }}>
                 <input
                   type="text"
@@ -71,7 +71,7 @@ const Profile = () => {
             <div className="grid-1" style={{ padding: "1rem" }}>
               <h1>Poin</h1>
               <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <p>tes</p>
+                <p style={{fontSize: '5rem'}}>{user.point}</p>
               </div>
             </div>
             <div className="grid-2">

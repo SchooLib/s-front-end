@@ -1,6 +1,7 @@
 import * as auth from "../services/authService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
 export const loginAdmin = createAsyncThunk(
   "admin/login",
   async ({data, redirect}, { rejectWithValue }) => {

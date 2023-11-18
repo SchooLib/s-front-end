@@ -1,13 +1,20 @@
-
+import { useEffect } from "react";
 import { Layout, Menu } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserById } from "../../redux/slices/userSlice";
 const { Header } = Layout;
 import { Link } from "react-router-dom";
 
 
 const HeaderComponent = () => {
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.auth.user.id);
 
-  const user = useSelector((state) => state.auth.user);
+  useEffect(() => {
+    dispatch(getUserById(userId))
+  }, [dispatch, userId]);
+
+  const user = useSelector((state) => state.user.user);
 
   const items = [
     {
@@ -53,8 +60,8 @@ const HeaderComponent = () => {
         <div>
           {user ? (
             <div style={{display: "flex"}}>
-              <p style={{marginRight: "10px"}}>120 Point</p>
-              <Link to={"/profile"} style={{ color: "white", marginRight: "10px" }}>{user.username}</Link>
+              <p style={{marginRight: "10px"}}>{user.point === null ? 0 : user.point} Point</p>
+              <Link to={"/profile"} style={{ color: "white", marginRight: "10px" }}>{user.fullName}</Link>
             </div>
             
           ) : (

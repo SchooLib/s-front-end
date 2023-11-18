@@ -3,7 +3,7 @@ import { Card, Input, Button, Typography, Switch } from "antd";
 import { UserOutlined, KeyOutlined } from "@ant-design/icons";
 import "./index.css";
 import { useDispatch } from "react-redux";
-import { loginAdmin } from "../../redux/slices/authSlice";
+import { loginAdmin, loginUser } from "../../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const { Text } = Typography;
@@ -41,12 +41,17 @@ const SSOLogin = () => {
     if (isAdmin) {
       console.log(formData)
       dispatch(
-        loginAdmin({username: formData.username, password: formData.password })
+        loginAdmin({ data :{username: formData.username, password: formData.password },redirect})
       );
-      redirect('/dashboard')
+      // redirect('/dashboard')
       // dispatch(setTheme("dark"))
     } else {
       //dispacth loginUser
+      console.log(formData)
+      dispatch(
+        loginUser({ data :{nisn: formData.nisn, password: formData.password },redirect})
+      );
+
     }
   };
 
@@ -97,6 +102,7 @@ const SSOLogin = () => {
               type="text"
               size="large"
               name="nisn"
+              onChange={handleChange}
               placeholder="Nomor Induk Siswa"
               prefix={
                 <UserOutlined

@@ -3,14 +3,35 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const loginAdmin = createAsyncThunk(
   "admin/login",
-  async (formData, { rejectWithValue }) => {
+  async ({data, redirect}, { rejectWithValue }) => {
     try {
-      const res = await auth.loginAdmin(formData);
+      const res = await auth.loginAdmin(data);
 
       if (res.data.meta.status == "success") {
         localStorage.setItem("user", JSON.stringify({ 
           token: res.data.token
         }));
+        redirect('/dashboard')
+      }
+
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  "user/login",
+  async ({data, redirect}, { rejectWithValue }) => {
+    try {
+      const res = await auth.loginUser(data);
+
+      if (res.data.meta.status == "success") {
+        localStorage.setItem("user", JSON.stringify({ 
+          token: res.data.token
+        }));
+        redirect('/dashboard')
       }
 
       return res.data;
@@ -60,6 +81,28 @@ const authSlice = createSlice({
         isAuthenticated: false,
       };
     },
+    [loginUser.pending]: (state) => {
+      return { ...state, loading: true, message: "Processing your action..." };
+    },
+    [loginUser.fulfilled]: (state, action) => {
+      return {
+        loading: false,
+        message: action.payload?.meta.message,
+        user: action.payload?.data,
+        status: action.payload?.status,
+        isAuthenticated: true,
+      };
+    },
+    [loginUser.rejected]: (state, action) => {
+      return {
+        loading: false,
+        message: action.payload?.data.meta.message,
+        user: {},
+        status: "error",
+        isAuthenticated: false,
+      };
+    },
+    
   },
 });
 

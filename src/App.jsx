@@ -1,5 +1,4 @@
-// App.js
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';

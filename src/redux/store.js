@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import achievementReducer from "./slices/achievementSlice";
 import userReducer from "./slices/userSlice";
+import { bookReducer } from "./slices/bookSlice";
 
 const persistConfig = {
   key: 'user',
@@ -18,6 +19,7 @@ export default () => {
       auth: persistedReducer,
       achievements: achievementReducer,
       user: userReducer,
+      books: bookReducer,
     },
     devTools: true,
     middleware: (getDefaultMiddleware) =>

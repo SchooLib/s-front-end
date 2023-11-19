@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Layout, Menu } from "antd";
+import { UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/slices/userSlice";
 const { Header } = Layout;
@@ -46,9 +47,9 @@ const HeaderComponent = () => {
       }}
     >
       <div className="logo">
-        <Link to="/" style={{ color: "white" }}>
-          <h1>SchooLib</h1>
-        </Link>
+      <Link to="/" style={{color:'white'}}>
+        <h1>GoLib</h1>
+      </Link>
       </div>
       <div
         style={{

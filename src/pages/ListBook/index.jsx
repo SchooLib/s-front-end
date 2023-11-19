@@ -1,10 +1,32 @@
+import React, { useState, useEffect } from "react";
+import { fetchBook } from "../../redux/slices/bookSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { CardBook } from "../../components"
-const ListBook = () =>{
+import { Link } from 'react-router-dom';
+import {Row} from "antd"
+
+const ListBook = (props) =>{
+    const {datas} = props
+    const dispatch = useDispatch();
+//   const redirect = useNavigate()
+  const {data, loading, error} = useSelector((state)=> state.books)
+  console.log(data)
+  useEffect(()=>{
+    dispatch(fetchBook())
+  }, [dispatch])
+  datas(data)
     return(
         <>
-            <div style={{ background: '#B9F0FC', padding: '50px', height:'100vh', display:'flex', gap:'20px'}}>
-                <CardBook/>
-                <CardBook/>
+            <div style={{ background: '#B9F0FC', padding: '50px',  display:'flex', gap:'20px'}}>
+                <Row gutter={44}>
+                {data.map((i, index)=>{
+                    return(
+                        <Link key={i.id} to={`/detail-book/${i.id}`}>
+                            <CardBook index={index} cover={i.image} name={i.title} desc={data.desc}/>
+                        </Link>
+                    )
+                })}
+                </Row>
             </div>
         </>
     )

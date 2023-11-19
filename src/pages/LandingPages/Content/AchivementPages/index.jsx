@@ -26,15 +26,13 @@ const Achivement = () => {
   const datas = achievements.contents;
 
   const matchGenre = (genre) => {
-    const keys = user?.stat ? Object.keys(user.stat) : [];
-    const result = keys.find((key) => user.stat[key] === genre);
-    return result;
+    const karyaUmumValue = user?.stat?.[genre];
+    return karyaUmumValue;
   };
 
-
-  const handleClaimAchivement = (achievementsId) => {
-    dispatch(claimAchievement({data: {achievementsId: achievementsId}}))
-    toast.success("Berhasil Claim Achivement");
+  const handleClaimAchivement = (achievementId) => {
+    dispatch(claimAchievement({achievementId: achievementId}))
+    //toast.success("Berhasil Claim Achivement");
   };
 
   return (
@@ -46,7 +44,7 @@ const Achivement = () => {
         {datas ? (
           datas.map((item, index) => (
           <Col xs={24} sm={12} md={8} lg={6} key={index} style={{paddingBottom:8}}>
-            <Card hoverable className="custom-card" bordered={true} style={{borderWidth: 2}}>
+            <Card className="custom-card" bordered={true} style={{borderWidth: 2}}>
               <div className="card-image">
                 <img alt={item.title} src={item.image} />
               </div>
@@ -55,7 +53,7 @@ const Achivement = () => {
               <div className="center-button">
                 {
                   matchGenre(item.readGenre) === item.maxRead ? (
-                    <Button type="primary" onClick={handleClaimAchivement(item.id)}>Claim</Button>
+                    <Button type="primary" onClick={() => handleClaimAchivement(item.id)}>Claim</Button>
                   ) : (
                     <Button type="primary" disabled>Claim</Button>
                     )

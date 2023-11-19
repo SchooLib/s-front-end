@@ -6,13 +6,13 @@ import { getUserById } from "../../redux/slices/userSlice";
 const { Header } = Layout;
 import { Link } from "react-router-dom";
 
-
 const HeaderComponent = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.user.id);
+  const loading = useSelector((state) => state.user.loading);
 
   useEffect(() => {
-    dispatch(getUserById(userId))
+    dispatch(getUserById(userId));
   }, [dispatch, userId]);
 
   const user = useSelector((state) => state.user.user);
@@ -51,9 +51,15 @@ const HeaderComponent = () => {
         <h1>GoLib</h1>
       </Link>
       </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent:"space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <Menu
-          style={{ backgroundColor: "#00B7F7", color: "white", width:"30vw" }}
+          style={{ backgroundColor: "#00B7F7", color: "white", width: "30vw" }}
           mode="horizontal"
           defaultSelectedKeys={["home"]}
           items={items}
@@ -67,7 +73,8 @@ const HeaderComponent = () => {
               <p style={{marginRight: "10px", marginTop:'5px'}}>{user.point ?  user.point : 0 } Point</p>
             </div>
             
-          ) : (
+          ) 
+          : (
             <Link
               to={"/login"}
               style={{
@@ -81,7 +88,8 @@ const HeaderComponent = () => {
             >
               Masuk
             </Link>
-          )}
+          ) 
+          }
         </div>
       </div>
     </Header>

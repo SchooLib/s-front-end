@@ -141,8 +141,8 @@ const DetailBook = () => {
           <br/>
           {message}
         </Card>
-        <Link to={'/listbook'}>
-            <Button style={{position:'relative', left:'50%', transform: 'translate(-50%,0)', backgroundColor:'#00b7f7', color:'white'}}>Kembali ke Daftar Buku</Button>
+        <Link to={'/'}>
+            <Button style={{position:'relative', left:'50%', transform: 'translate(-50%,0)', backgroundColor:'#00b7f7', color:'white'}}>Kembali ke Menu Utama</Button>
           </Link>
       </>: null}
     </>

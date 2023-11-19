@@ -35,7 +35,14 @@ const Profile = () => {
             }}
           >
             <div>
-              <img src={user.img} alt="profile" className="image-profile" />
+              <img
+                src={
+                  user.img ||
+                  `https://ui-avatars.com/api/?name=${user.fullName}`
+                }
+                alt="profile"
+                className="image-profile"
+              />
               <form style={{ display: "flex", flexFlow: "column" }}>
                 <input
                   type="text"
@@ -59,27 +66,34 @@ const Profile = () => {
                   }}
                   disabled
                 />
+                <Button type="primary" onClick={handleLogout}>
+                  Logout
+                </Button>
               </form>
-              <Button type="primary" onClick={handleLogout}>
-                Logout
-              </Button>
             </div>
           </div>
         </Col>
         <Col span={12} className="statistik-profile-content">
           <div className="parent-grid">
-            <div className="grid-1" style={{ padding: "1rem" }}>
+            <div
+              className="grid-1"
+              style={{ padding: "1rem", display: "flex", flexFlow: "column" }}
+            >
               <h1>Poin</h1>
-              <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <p>tes</p>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
+                }}
+              >
+                <p style={{ fontSize: "10rem" }}>
+                  {user.point === null ? 0 : user.point}
+                </p>
               </div>
             </div>
-            <div className="grid-2">
-              <h1>Rank</h1>
-            </div>
-            <div className="grid-3">
-              <h1>Leaderboard</h1>
-            </div>
+            
           </div>
         </Col>
       </Row>

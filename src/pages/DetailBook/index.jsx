@@ -1,39 +1,19 @@
-// import { useParams, Link } from 'react-router-dom';
 
-// const DetailBook = () =>{
-//     const {bookId} = useParams()
-//     const datas =
-//     [
-//         {
-//             id: 1,
-//             cover : 'https://cdn.gramedia.com/uploads/items/9786020650357_educated_cov.jpg',
-//             name : 'Book 1',
-//             desc : 'Book 1 is Lorem Ipsum'
-//         },
-//         {
-//             id:2,
-//             cover : 'https://cdn.gramedia.com/uploads/items/9786020650357_educated_cov.jpg',
-//             name : 'Book 2',
-//             desc : 'Book 2 is Lorem Ipsum'
-//         },
-//     ]
-//     const data = datas.find((data) => data.id === parseInt(id));
-// }
-
-// export default DetailBook
 import React, { useState, useEffect } from "react";
-import { fetchBook } from "../../redux/slices/bookSlice";
+import { fetchBook, reviewBook } from "../../redux/slices/bookSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
-import { Input, Button } from "antd";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { Input, Button, Rate, Card } from "antd";
+import {CheckCircleFilled} from "@ant-design/icons"
 const { TextArea } = Input;
 
 const DetailBook = () => {
   // const { datas } = props;
   const dispatch = useDispatch();
+  const redirect = useNavigate()
   const { id } = useParams();
 
-  const { data, loading, error } = useSelector((state) => state.books);
+  const { data, loading, error, status, message } = useSelector((state) => state.books);
   const userId = useSelector((state) => state.auth.user.id);
   useEffect(() => {
     dispatch(fetchBook());
@@ -47,17 +27,62 @@ const DetailBook = () => {
     }
     return null;
   };
+  console.log(status)
   const bookInfo = findBookHandle(id);
   // console.log(bookInfo.title);
   const [isType, setIsType] = useState("");
-  const handleReview = (e) => {
-    setIsType(e.target.value);
-  };
   // fetch book detail using this bookId
   // const publisher = ''
   // bookInfo.map((index,a)=>{
   //   publisher = a.name
   // })
+  const [rateValue, setRateValue] = useState(0);
+  console.log(rateValue)
+  const rateHandle = value =>{
+    setRateValue(value)
+  }
+  const [formData, setFormData] = useState({
+    // bookId: bookInfo.id,
+    content: "",
+    rating:rateValue,
+    // point:bookInfo.review_point,
+    // key:bookInfo.review_keys
+  });
+  console.log(formData)
+  const handleChange = (event) => {
+    const { name, value } = event.target; //event target destructuring
+    setFormData((prevFormData) => {
+      //set State Value
+      return {
+        ...prevFormData, //take prev state to new object
+        [name]: value, // if type is checkbox the value will be checked (bolean value) else the value willl be value of input
+      };
+    });
+  };
+
+  const handleSubmit = () => {
+    // e.preventDefault();
+    // if (isAdmin) {
+    //   console.log(formData)
+    //   dispatch(
+    //     loginAdmin({ data :{username: formData.username, password: formData.password },redirect})
+    //   );
+    //   // redirect('/dashboard')
+    //   // dispatch(setTheme("dark"))
+    // } else {
+    //   //dispacth loginUser
+    //   console.log(formData)
+    //   dispatch(
+    //     loginUser({ data :{nisn: formData.nisn, password: formData.password },redirect})
+    //   );
+
+    // }
+    dispatch(reviewBook({data:{bookId:bookInfo.id,content: formData.content,
+    rating: rateValue,
+    point:bookInfo.review_point,
+    key:bookInfo.review_keys}, redirect}))
+    redirect(`/detail-book/${id}`)
+  };
   return (
     <>
     {bookInfo?
@@ -87,16 +112,16 @@ const DetailBook = () => {
           <p>{bookInfo.desc}</p>
           {userId?
           <>
+          <Rate onChange={rateHandle}/>
           <TextArea
+            name="content"
             placeholder={`Tulis ulasan untuk ${bookInfo.title}`}
             style={{ height: "250px", width: "100%" }}
-            onChange={handleReview}
+            onChange={handleChange}
             />
           <Button
             style={{ background: "#012b68", color: "white" }}
-            onClick={() =>
-              isType ? console.log("ada") : console.log("kosong")
-            }
+            onClick={handleSubmit}
             >
             Kirim
           </Button>
@@ -109,6 +134,17 @@ const DetailBook = () => {
       </div>
       </>
       :null}
+      {status ? 
+      <>
+        <Card style={{margin:'20px 70px', textAlign:'center'}}>
+          <CheckCircleFilled style={{fontSize:'50px', marginBottom:'20px', color:'#a0d911'}}/>
+          <br/>
+          {message}
+        </Card>
+        <Link to={'/listbook'}>
+            <Button style={{position:'relative', left:'50%', transform: 'translate(-50%,0)', backgroundColor:'#00b7f7', color:'white'}}>Kembali ke Daftar Buku</Button>
+          </Link>
+      </>: null}
     </>
   );
 };

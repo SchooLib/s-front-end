@@ -64,7 +64,7 @@ const HeaderComponent = () => {
               <Link to={"/profile"} style={{ color: "white", marginRight: "10px" }}>
                 <UserOutlined style={{fontSize:'20px', marginTop:'28px'}}/>
                 </Link>
-              <p style={{marginRight: "10px", marginTop:'5px'}}>{user.point === null ? 0 : user.point} Point</p>
+              <p style={{marginRight: "10px", marginTop:'5px'}}>{user.point ?  user.point : 0 } Point</p>
             </div>
             
           ) : (

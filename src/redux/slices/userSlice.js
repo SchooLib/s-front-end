@@ -75,7 +75,7 @@ const userSlice = createSlice({
                 ...state,
                 loading: false,
                 message: action.payload.data.message,
-                status: action.payload.meta.status,
+                // status: action.payload.meta.status,
             }
         },
     },
